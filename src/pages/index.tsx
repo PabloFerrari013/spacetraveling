@@ -3,13 +3,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { getPrismicClient } from '../services/prismic';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+import { BsCalendar4, BsFillPersonFill } from 'react-icons/bs';
+import { getPrismicClient } from '../services/prismic';
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
-import { BsCalendar4, BsFillPersonFill } from 'react-icons/bs';
 
 interface Post {
   uid?: string;
@@ -33,9 +33,9 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({ postsPagination }) => {
   const [nextPage, setNextPage] = useState('');
   const [posts, setPosts] = useState<Post[]>(postsPagination.results);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(!!postsPagination.next_page);
 
-  async function handleNewPagination() {
+  async function handleNewPagination(): Promise<void> {
     try {
       if (!postsPagination.next_page) {
         setHasMore(false);
@@ -50,7 +50,6 @@ const Home: NextPage<HomeProps> = ({ postsPagination }) => {
 
           if (!res.next_page) {
             setHasMore(false);
-            return;
           }
         });
       } else {
@@ -82,23 +81,25 @@ const Home: NextPage<HomeProps> = ({ postsPagination }) => {
         {posts.map(post => (
           <article key={post.uid} className={styles.container}>
             <Link href={`/post/${post.uid}`} passHref>
-              <strong>{post.data.title}</strong>
+              <a>
+                <strong>{post.data.title}</strong>
 
-              <p>{post.data.subtitle}</p>
+                <p>{post.data.subtitle}</p>
 
-              <time>
-                <BsCalendar4 />
-                {format(
-                  new Date(post.first_publication_date),
-                  "dd 'de' MMM 'de' yyyy",
-                  {
-                    locale: ptBR,
-                  }
-                )}
-              </time>
-              <span>
-                <BsFillPersonFill /> {post.data.author}
-              </span>
+                <time>
+                  <BsCalendar4 />
+                  {format(
+                    new Date(post.first_publication_date),
+                    'dd MMM yyyy',
+                    {
+                      locale: ptBR,
+                    }
+                  )}
+                </time>
+                <span>
+                  <BsFillPersonFill /> {post.data.author}
+                </span>
+              </a>
             </Link>
           </article>
         ))}
