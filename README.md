@@ -12,7 +12,6 @@ spacetraveling is a blog created to test programming knowledge. Services like Pr
   <img align="center" alt="Axios" height="30" width="40" src="https://avatars.githubusercontent.com/u/32372333?s=200&v=4">
   <img align="center" alt="SASS" height="30" width="40" src="https://sass-lang.com/assets/img/logos/logo-b6e1ef6e.svg">
   <img align="center" alt="Fauna" height="30" width="40" src="https://fauna.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fpo4qc9xpmpuh%2F7itYmeRxmVGIXwwGWHrQU3%2F42f3e7fa7d39fab5b6222f6199f0203c%2FFauna_Logo.svg&w=384&q=75">
-  <img align="center" alt="SASS" height="30" width="40" src="https://sass-lang.com/assets/img/logos/logo-b6e1ef6e.svg">
 </div>
 
 ---
